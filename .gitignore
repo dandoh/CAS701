@@ -1,6 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
-*
+/*
 !*.tex
-!images/*.pdf
+!images/
 !.gitignore
 !Makefile
