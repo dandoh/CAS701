@@ -144,7 +144,8 @@
       \item $\tau(C_i) = \sigma_{i, 1} \rightarrow \dots \rightarrow \sigma_{i, n_i} \rightarrow \sigma$ \\
       (or $C_i :: \sigma_{i, 1} \rightarrow \dots \rightarrow \sigma_{i, n_i} \rightarrow \sigma$)
       \item $C_i \dots \neq C_j \dots$ if $i \neq j$
-      \item $(C_i x_1 \dots x_{n_i} = C_i y_1 \dots y_{n_i}) \equiv (x_1 = y_1) \land \dots \land (x_{n_i} = y_{n_i})$
+      \item $(C_i \ x_1 \dots x_{n_i} = C_i \ y_1 \dots y_{n_i}) \equiv (x_1 = 
+      y_1) \land \dots \land (x_{n_i} = y_{n_i})$
       \item Induction principle for $\sigma$
       \item And more
     \end{itemize}
@@ -155,7 +156,7 @@
     \frametitle{User-defined type}
     \begin{equation*}
       \begin{split}
-        & data \; nat \ = \ Zero \ | \ Suc \ nat
+        & datatype \; nat \ = \ Zero \ | \ Suc \ nat
       \end{split}
     \end{equation*}
     Gives us:
