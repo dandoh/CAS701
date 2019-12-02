@@ -6,6 +6,7 @@
 \usepackage{amsmath, amssymb, amsthm}
 \usetheme{Warsaw}
 \newcommand*{\mdot}{\ensuremath{\ . \ }}
+\renewcommand{\indent}{\hspace*{1em}}
 
 
 \hypersetup{colorlinks = true}
@@ -266,6 +267,133 @@
 	\frametitle{Proof Methods - \textit{try}}
 	\centering
 	\includegraphics[scale=0.42]{images/try.png}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Isar - Structured Proof Language}
+    General structure: \\~\
+    
+    \textbf{theorem} ``$f_0 \rightarrow f_n$"
+    
+    \textbf{proof}
+    
+    \indent \textbf{assume} ``$f_0$"
+    
+    \indent \textbf{have} ``$f_1$" \textbf{by} ``..."
+    
+    \indent ...
+    
+    \indent \textbf{show} ``$f_n$" \textbf{by} ``..."
+    
+    \textbf{qed}
+  \end{frame}
+
+  \begin{frame}
+	\frametitle{Isar - Structured Proof Language}
+	\begin{itemize}
+		\item If step is consequence of previous line, use \textbf{hence}
+		\item If final step is consequence of previous line, use 
+		\textbf{thus}\\~\
+	\end{itemize}
+
+	\textbf{theorem} ``$f_0 \rightarrow f_n$"
+
+	\textbf{proof}
+
+	\indent \textbf{assume} ``$f_0$"
+
+	\indent \textbf{hence} ``$f_1$" \textbf{by} ``..."
+
+	\indent ...
+
+	\indent \textbf{thus} ``$f_n$" \textbf{by} ``..."
+
+	\textbf{qed}
+  \end{frame}
+
+
+  \begin{frame}
+	\frametitle{Isar - Structured Proof Language}
+	To prove an equality by chaining equality steps:\\~\
+
+	\textbf{theorem} ``$a = c$"
+
+	\textbf{proof}
+
+	\indent \textbf{have} ``$a = b$" \textbf{by} ``..."
+
+	\indent \textbf{also have} ``... $= c$" \textbf{by} ``..."
+
+	\indent \textbf{finally show} ``$a = c$" .
+
+	\textbf{qed}
+  \end{frame}
+
+  \begin{frame}
+	\frametitle{Isar - Structured Proof Language}
+	Proof by cases:\\~\
+	
+	\textbf{theorem} ``$P$"
+	
+	\textbf{proof} \textit{cases}
+	
+	\indent \textbf{assume} ``$Q$"
+	
+	\indent ...
+
+	\indent \textbf{show} ``$P$" \textbf{by} ``..."
+	
+	\textbf{next}
+	
+	\indent \textbf{assume} ``$\lnot Q$"
+	
+	\indent ...
+	
+	\indent \textbf{show} ``$P$" \textbf{by} ``..."
+	
+	\textbf{qed}
+  \end{frame}
+
+  \begin{frame}
+	\frametitle{Isar - Structured Proof Language}
+	Proving a bi-implication:\\~\
+	
+	\textbf{theorem} ``$P \leftrightarrow Q$"
+	
+	\textbf{proof}
+	
+	\indent \textbf{assume} ``$P$"
+	
+	\indent ...
+	
+	\indent \textbf{show} ``$Q$" \textbf{by} ``..."
+	
+	\textbf{next}
+	
+	\indent \textbf{assume} ``$Q$"
+	
+	\indent ...
+	
+	\indent \textbf{show} ``$P$" \textbf{by} ``..."
+	
+	\textbf{qed}
+  \end{frame}
+
+  \begin{frame}
+	\frametitle{Isar - Structured Proof Language}
+	Proof by contradiction:\\~\
+	
+	\textbf{theorem} ``$P$"
+	
+	\textbf{proof} (\textit{rule ccontr})
+	
+	\indent \textbf{assume} ``$\lnot P$"
+	
+	\indent ...
+	
+	\indent \textbf{show} ``$False$" \textbf{by} ``..."
+	
+	\textbf{qed}
   \end{frame}
 
   \begin{frame}
