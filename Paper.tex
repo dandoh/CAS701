@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+
+\title{Isabelle/HOL \\ \large CAS 701 Project Paper}
+
+\author{Brooks MacLachlan, Nhan Thai}
+
+\date{\today}
+
+\begin{document}
+	
+\maketitle
+
+\newpage
+
+The highest-level structure in Isabelle is called a theory, and can be declared 
+with the keyword \textbf{theory} followed by the name of the theory. Each file 
+should contain one theory, where the file name matches the name of the theory. 
+The file extension for Isabelle files is ``.thy''. Theories can import other 
+theories using the keyword \textbf{imports} followed by the names of the 
+theories to import. The basic types, definitions, and theorems predefined in 
+Isabelle/HOL are defined in a theory called ``Main'', which must be explicitly 
+imported in other theories to use those predefined items. The body of a theory 
+is a block containing definitions of types, functions, theorems, and proofs.
+
+Since Isabelle/HOL is a specialization of the more general language Isabelle, 
+there needs to be a distinction between Isabelle syntax and Isabelle/HOL 
+syntax. For example, language keywords like \textbf{theory} are part of the 
+general Isabelle syntax, whereas expressions of terms and types are part of 
+Isabelle/HOL. Thus, anything Isabelle/HOL-specific must be enclosed in 
+quotation marks. The use of quotation marks in this way is a major difference 
+between Isabelle/HOL and more traditional functional programming languages. In 
+the authors' experience, understanding when quotation marks were required was 
+one of the more confusing and unintuitive aspects of learning Isabelle/HOL.
+	
+Theorems and lemmas can be expressed in Isabelle/HOL using the keyword 
+\textbf{theorem} or \textbf{lemma} followed optionally by a name and colon then 
+mandatorily by a proposition in quotation 
+marks. A proposition is simply an expression of type \textit{bool}. Internally, 
+Isabelle/HOL does not distinguish between theorems and lemmas, so having both 
+keywords is simply to allow someone using Isabelle to organize their theory in 
+a more understandable way. Since they are treated identically by Isabelle, we 
+will collectively refer to theorems and lemmas as theorems from now on.
+
+Any theorem must be followed by a proof. In general, there are two ways a proof 
+can be laid out in Isabelle/HOL. The basic way is as a sequence of ``apply'' 
+steps, where each step consists of the keyword \textbf{apply} followed by the 
+name of the proof method to apply. Proofs in this style must end with the 
+keyword \textbf{done}. The other way to express a proof is in Isar. Isar is a 
+language built-in to Isabelle/HOL for expressing proofs in a more structured 
+and readable style, where intermediate steps are explicitly shown, with 
+subproofs. In either proof style, single-line proofs can be expressed with the 
+keyword \textbf{by} followed by the name of the proof method to use.
+
+Induction is a very common proof method, so it is available in Isabelle/HOL. To 
+apply the induction method, one would call \textit{induction} followed by the 
+name of the variable to induct on or induction rule to use. Whenever a function 
+is defined recursively or a predicate inductively, an induction rule 
+corresponding to that function or predicate is automatically created. These 
+rules can be used in induction proofs to split the cases based on the rules in 
+the definition of the function or predicate, instead of based on the general 
+induction rule for an inductive type, which sometimes simplifies proofs. 
+Checking the proof state in the interactive Isabelle/jEdit environment after 
+applying induction will show that the proof has been split into a number of 
+sub-goals based on the base case(s) and induction step(s). Each sub-goal then 
+needs to be proven, which is often possible by an automated proof method.
+
+One of the most straightforward automated proof methods available in 
+Isabelle/HOL is called \textit{simp}, short for ``simplification''. This proof 
+method repeatedly applies simplification rules to prove the theorem. A 
+simplification rule is an equality where, if the left-hand side of the equality 
+is encountered in an expression, it can be directly rewritten as the right-hand 
+side. Each rule in a recursive function definition is automatically declared as 
+a simplification rule, as are induction hypotheses in induction proofs. 
+Theorems, however, are not. If one wishes to use a theorem as a simplification 
+rule when applying \textit{simp}, they may write \textit{simp add:} followed by 
+the theorem name to do so. Another option is to define the theorem as a 
+simplification rule, which can be done by adding \textit{[simp]} between the 
+theorem name and colon in the theorem definition.
+
+Another automated proof method is \textit{auto}, which implicitly does 
+\textit{simp} but also does more, such as applying built-in introduction and 
+elimination rules for adding or removing logical operators to an expression. 
+For example, an implication introduction rule could be applied if there is an 
+assumption, and it would bring the assumption into the expression as the 
+precedent of an implication. Similarly to declaring a theorem as a 
+simplification rule, a theorem can be declared as an introduction or 
+elimination rule. However, it is up to the user of Isabelle/HOL to ensure that 
+doing so will never lead to nontermination.
+
+Some other common automated proof methods are \textit{arith} and 
+\textit{blast}. \textit{arith} works for proving purely arithmetic expressions 
+involving only numbers, variables, basic operators like addition, equality, and 
+less than, and logical connectives. \textit{blast} is theoretically a complete 
+proof method for first order logic. If a user is having trouble finding a proof 
+method for a theorem, they can use the command \textbf{sledgehammer}, which 
+will query external proof solvers and return Isabelle/HOL-compatible proof 
+methods that can be directly copied and pasted into the proof. \textbf{try} is 
+a command similar to \textbf{sledgehammer} except that it tries internal proof 
+methods in addition to external ones.
+
+\newpage
+
+\nocite{*}
+
+\bibliographystyle{plain}
+
+\bibliography{References}
+
+\end{document}
