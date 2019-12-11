@@ -13,6 +13,45 @@
 \maketitle
 
 \newpage
+\section{Introduction}
+% TODO: The need of proof assistants
+Math and computing are the foundation of rapid development nowadays, but issues arise as their applications getting bigger and
+more complicated:
+
+(1) On one hand, in the field of mathematics, people often write proofs assuming
+the readers can infer missing pieces of information and definitions,
+otherwise it would be very tedious to repeat similar mathematics concepts
+over and over. However, this approach gives rise to two problems. One is
+that authors are prone to making mistakes because it is sometimes hard to
+keep track of all the underlying assumptions. The other is that for readers
+to convince themselves of the proof correctness, they have to go over the
+proof and verify it themselves.
+
+(2) On the other hand, in the field of computing, writing tests alone is not
+sufficient to show programs' correctness.
+Also, it is unreasonable to write an algorithm on a computer then prove its
+correctness on papers, for even if we can prove the idea is right, we have
+no means to show the implementation is accurate.
+
+
+Proof assistants are to solve those problems,
+and we believe it is inevitable that they will be a critical part of future mathematics and computing.
+Isabelle/HOL is one of the leading and most matured proof assistants up to date, and
+it is both a functional programming language and a proof assistant.
+
+% TODO:
+
+\section{Isabelle structure and principle}
+
+Since Isabelle/HOL is a specialization of the more general language Isabelle,
+there needs to be a distinction between Isabelle syntax and Isabelle/HOL
+syntax. For example, language keywords like \textbf{theory} are part of the
+general Isabelle syntax, whereas expressions of terms and types are part of
+Isabelle/HOL. Thus, anything Isabelle/HOL-specific must be enclosed in
+quotation marks. The use of quotation marks in this way is a major difference
+between Isabelle/HOL and more traditional functional programming languages. In
+the authors' experience, understanding when quotation marks were required was
+one of the more confusing and unintuitive aspects of learning Isabelle/HOL.
 
 The highest-level structure in Isabelle is called a theory, and can be declared 
 with the keyword \textbf{theory} followed by the name of the theory. Each file 
@@ -24,36 +63,28 @@ Isabelle/HOL are defined in a theory called ``Main'', which must be explicitly
 imported in other theories to use those predefined items. The body of a theory 
 is a block containing definitions of types, functions, theorems, and proofs.
 
-Since Isabelle/HOL is a specialization of the more general language Isabelle, 
-there needs to be a distinction between Isabelle syntax and Isabelle/HOL 
-syntax. For example, language keywords like \textbf{theory} are part of the 
-general Isabelle syntax, whereas expressions of terms and types are part of 
-Isabelle/HOL. Thus, anything Isabelle/HOL-specific must be enclosed in 
-quotation marks. The use of quotation marks in this way is a major difference 
-between Isabelle/HOL and more traditional functional programming languages. In 
-the authors' experience, understanding when quotation marks were required was 
-one of the more confusing and unintuitive aspects of learning Isabelle/HOL.
-	
-Theorems and lemmas can be expressed in Isabelle/HOL using the keyword 
-\textbf{theorem} or \textbf{lemma} followed optionally by a name and colon then 
-mandatorily by a proposition in quotation 
-marks. A proposition is simply an expression of type \textit{bool}. Internally, 
-Isabelle/HOL does not distinguish between theorems and lemmas, so having both 
-keywords is simply to allow someone using Isabelle to organize their theory in 
-a more understandable way. Since they are treated identically by Isabelle, we 
+Theorems and lemmas can be expressed in Isabelle/HOL using the keyword
+\textbf{theorem} or \textbf{lemma} followed optionally by a name and colon then
+mandatorily by a proposition in quotation
+marks. A proposition is simply an expression of type \textit{bool}. Internally,
+Isabelle/HOL does not distinguish between theorems and lemmas, so having both
+keywords is simply to allow someone using Isabelle to organize their theory in
+a more understandable way. Since they are treated identically by Isabelle, we
 will collectively refer to theorems and lemmas as theorems from now on.
 
-Any theorem must be followed by a proof. In general, there are two ways a proof 
-can be laid out in Isabelle/HOL. The basic way is as a sequence of ``apply'' 
-steps, where each step consists of the keyword \textbf{apply} followed by the 
-name of the proof method to apply. Proofs in this style must end with the 
-keyword \textbf{done}. The other way to express a proof is in Isar. Isar is a 
-language built-in to Isabelle/HOL for expressing proofs in a more structured 
-and readable style, where intermediate steps are explicitly shown, with 
-subproofs. In either proof style, single-line proofs can be expressed with the 
+Any theorem must be followed by a proof. In general, there are two ways a proof
+can be laid out in Isabelle/HOL. The basic way is as a sequence of ``apply''
+steps, where each step consists of the keyword \textbf{apply} followed by the
+name of the proof method to apply. Proofs in this style must end with the
+keyword \textbf{done}. The other way to express a proof is in Isar. Isar is a
+language built-in to Isabelle/HOL for expressing proofs in a more structured
+and readable style, where intermediate steps are explicitly shown, with
+subproofs. In either proof style, single-line proofs can be expressed with the
 keyword \textbf{by} followed by the name of the proof method to use.
 
-Induction is a very common proof method, so it is available in Isabelle/HOL. To 
+\section{Theorems and proof methods}
+
+Induction is a very common proof method, so it is available in Isabelle/HOL. To
 apply the induction method, one would call \textit{induction} followed by the 
 name of the variable to induct on or induction rule to use. Whenever a function 
 is defined recursively or a predicate inductively, an induction rule 
@@ -79,7 +110,7 @@ the theorem name to do so. Another option is to define the theorem as a
 simplification rule, which can be done by adding \textit{[simp]} between the 
 theorem name and colon in the theorem definition.
 
-Another automated proof method is \textit{auto}, which implicitly does 
+Another automated proof method is \textit{auto}, which implicitly does
 \textit{simp} but also does more, such as applying built-in introduction and 
 elimination rules for adding or removing logical operators to an expression. 
 For example, an implication introduction rule could be applied if there is an 

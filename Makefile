@@ -1,3 +1,3 @@
 all:
-	xelatex Project.tex
-	open Project.pdf
+	xelatex Paper.tex
+	open Paper.pdf
